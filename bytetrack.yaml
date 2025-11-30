@@ -1,0 +1,36 @@
+# ByteTrack tracker settings optimized for KITTI vehicle tracking
+# All tracker-specific parameters are managed here for clarity and consistency.
+
+tracker_type: bytetrack
+
+# --- Core Thresholds ---
+
+# High-confidence detection threshold.
+# MODIFIED: Increased from 0.5 to 0.6 to filter out more initial false positives.
+track_high_thresh: 0.5
+
+# Low-confidence detection threshold.
+# Kept at 0.1 for now, as it's mainly for occlusion recovery.
+track_low_thresh: 0.1
+
+# New track threshold. An unmatched high-confidence detection must have a score higher than this
+# to initiate a new track.
+# MODIFIED: Increased from 0.6 to 0.7. THIS IS THE MOST IMPORTANT CHANGE to reduce false positives.
+new_track_thresh: 0.6
+
+# --- Association ---
+
+
+match_thresh: 0.8
+
+# --- Track Lifecycle ---
+
+# The number of consecutive frames a track can be lost before it is deleted.
+# Kept at 60, which is a good value for handling vehicle occlusions in KITTI.
+track_buffer: 60
+
+# --- Advanced ---
+
+# Whether to fuse detection scores with motion/IoU scores during association.
+# Kept as True, as it generally provides more stable matching.
+fuse_score: True
